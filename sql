@@ -28,3 +28,26 @@ CREATE TABLE code_reviews (
   class_id INT NOT NULL,
   FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE
 );
+
+
+DELIMITER //
+
+CREATE TRIGGER insert_class_member AFTER INSERT ON members
+FOR EACH ROW
+BEGIN
+  INSERT INTO class_members (class_id, member_id) VALUES (NEW.class_id, NEW.id);
+END //
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_members_delete
+AFTER DELETE ON members
+FOR EACH ROW
+BEGIN
+    DELETE FROM class_members WHERE member_id = OLD.id;
+END $$
+DELIMITER ;
+
+
+
