@@ -29,6 +29,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Null;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -103,12 +104,14 @@ public class addMemberJspController extends HttpServlet {
 
             int c_id = Integer.parseInt(request.getParameter("classes_selected"));
 
+
             try {
                 System.out.println("REMI n'A RAISON");
-                mDAO.add(new Member(name,email,birthdate,c_id));
+                mDAO.add(new Member(name, email, birthdate, c_id));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
             response.sendRedirect("/Pool/index");
         }
         else if(request.getParameter("modifMem")!=null){
@@ -151,8 +154,7 @@ public class addMemberJspController extends HttpServlet {
             String email = request.getParameter("email");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
             System.out.println("addMem");
-            //String dateInString = "1995-05-02";
-            String dateInString = request.getParameter("date");
+            String dateInString = "1995-05-02";
             java.util.Date utilbirthdate = new java.util.Date();
             try {
                 utilbirthdate = formatter.parse(dateInString);

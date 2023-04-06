@@ -19,6 +19,7 @@ public class Member {
         this.classId = classId;
     }
 
+
     public int getId() {
         return id;
     }

@@ -72,7 +72,7 @@ public class ReviewDAO extends DAO<Review> {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, review.getName());
             stmt.setString(2, review.getDescription());
-            stmt.setDate(3, review.getDate());
+            stmt.setTimestamp(3, review.getDate());
             stmt.setInt(4, review.getClassId());
             stmt.setInt(5, review.getId());
             rowsUpdated = stmt.executeUpdate();
