@@ -36,11 +36,11 @@ public class addPromotionJspController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Logger logger = LoggerFactory.getLogger(addMemberJspController.class);
+
 
         System.out.println("je suis dans post de PromotionController");
         if (request.getParameter("addProm") != null) {
-            logger.info("COUCOU_Promotion");
+
             String name = request.getParameter("name");
             String promotion = request.getParameter("classes_selected");
 
