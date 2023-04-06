@@ -223,11 +223,12 @@
                                 <form method="post" action="${pageContext.request.contextPath}/addProm">
                                     <button class="list-group-item" name="modifProm">
                                         <i class="fa fa-users fa-fw"></i> <c:out value="${sh_promo.name}"/>
+                                        <span class="pull-right text-muted small"><em><c:out value="${sh_promo.nbMembres}"/> membre(s)</em>
                                     </button>
                                     <input type="hidden" value="${sh_promo.name}" name="name">
                                     <input type="hidden" value="${sh_promo.id}" name="id">
 
-                                    <!-- <span class="pull-right text-muted small"><em><c:out value="${sh_promo.name}"/> membre(s)</em> -->
+
                                     </span>
                                     </a>
                                 </form>
