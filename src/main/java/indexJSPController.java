@@ -62,7 +62,7 @@ public class indexJSPController extends HttpServlet {
         List<Review> reviews = new ArrayList<>();
         List<Promotion> prom = new ArrayList<>();
         try {
-            reviews = rev.getAll();
+            reviews = rev.getAllCurrent();
             prom = pro.getAll();
             mems = m.getAll();
         } catch (SQLException e) {

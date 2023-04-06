@@ -11,6 +11,25 @@ public class ReviewDAO extends DAO<Review> {
     }
 
 
+    public ArrayList<Review> getAllCurrent() throws SQLException {
+        ArrayList<Review> reviews = new ArrayList<>();
+        String sql = "SELECT r.id, r.name, description, datetime, c.name FROM code_reviews as r INNER JOIN classes as c on r.class_id = c.id WHERE datetime > CURRENT_DATE ORDER BY datetime;";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Review review = new Review();
+                review.setId(rs.getInt("r.id"));
+                review.setName(rs.getString("r.name"));
+
+                review.setDescription(rs.getString("description"));
+                review.setDate(rs.getTimestamp("datetime"));
+                review.setPromotion(rs.getString("c.name"));
+                reviews.add(review);
+            }
+        }
+        return reviews;
+    }
     public ArrayList<Review> getAll() throws SQLException {
         ArrayList<Review> reviews = new ArrayList<>();
         String sql = "SELECT r.id, r.name, description, datetime, c.name FROM code_reviews as r INNER JOIN classes as c on r.class_id = c.id;";
