@@ -46,8 +46,14 @@ AFTER DELETE ON members
 FOR EACH ROW
 BEGIN
     DELETE FROM class_members WHERE member_id = OLD.id;
+
+    -- Supprimer la classe si elle n'a plus de membres
+    IF (SELECT COUNT(*) FROM class_members WHERE class_id = OLD.class_id) = 0 THEN
+        DELETE FROM classes WHERE id = OLD.class_id;
+    END IF;
 END $$
 DELIMITER ;
+
 
 
 
