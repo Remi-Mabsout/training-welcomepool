@@ -188,6 +188,17 @@ public class addMemberJspController extends HttpServlet {
             }
             response.sendRedirect("/Pool/index");
         }
+        else if (request.getParameter("deletePromo") != null) {
+            int cid = Integer.parseInt(request.getParameter("cid"));
+
+
+            try {
+                dao.deleteById(cid);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            response.sendRedirect("/Pool/index");
+        }
 
         //request.getRequestDispatcher("/index").forward(request,response);
         //request.getRequestDispatcher("/WEB-INF/some-result.jsp").forward(request, response);

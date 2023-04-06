@@ -168,12 +168,21 @@
                                                     <td><c:out value="${member.name}"/></td>
                                                     <input type="hidden" value="${member.email}" name="email">
                                                     <input type="hidden" value="${member.id}" name="id">
+                                                    <input type="hidden" value="${member.classId}" name="cid">
                                                     <input type="hidden" value="${member.name}" name="name">
                                                     <td><c:out value="${member.email}"/> </td>
                                                     <td><c:out value="${member.promotion}"/> </td>
                                                     <td>
                                                         <button name="modifMem" type="submit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> Modifier</button>
                                                         <button name="deleteMem" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Supprimer</button>
+                                                        <c:choose>
+                                                            <c:when test="${member.classId != -1}">
+                                                                <button name="deletePromo" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Supprimer la Promo</button>
+                                                             </c:when>
+                                                         <c:otherwise>
+
+                                                         </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </form>
                                             </tr>
