@@ -61,8 +61,10 @@ public class reviewIndexJSPController extends HttpServlet {
         List<Member> mems = new ArrayList<>();
         List<Promotion> prom = new ArrayList<>();
         List<Review> rev = new ArrayList<>();
+        List<Review> rev2 = new ArrayList<>();
         try {
             rev = r.getAll();
+            rev2 = r.getAllCurrent();
             prom = pro.getAll();
             mems = m.getAll();
         } catch (SQLException e) {
@@ -72,8 +74,8 @@ public class reviewIndexJSPController extends HttpServlet {
 
         List<Review> short_reviews = new ArrayList<>();
         if (rev.size() > 0) {
-            for(int i = 0; rev.size() > 3 ? i < 3 : i < rev.size(); i++){
-                short_reviews.add(rev.get(i));
+            for(int i = 0; rev2.size() > 3 ? i < 3 : i < rev2.size(); i++){
+                short_reviews.add(rev2.get(i));
             }
 
         }
