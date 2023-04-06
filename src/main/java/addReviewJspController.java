@@ -82,6 +82,8 @@ public class addReviewJspController extends HttpServlet {
         String URL = "jdbc:mysql://localhost:3306/welcome_pool_Code_Review";
         String USERNAME = "SVC_Java";
         String PASSWORD = "1xqOOMTNMjnzZ76TPaRA";
+        PromotionDAO dao = new PromotionDAO(URL, USERNAME, PASSWORD);
+        ReviewDAO rDAO = new ReviewDAO(URL, USERNAME, PASSWORD);
 
         if (request.getParameter("addReview") != null) {
             String name = request.getParameter("name");
@@ -97,22 +99,88 @@ public class addReviewJspController extends HttpServlet {
 
             Timestamp ts = Timestamp.valueOf(dt);
 
-            ReviewDAO rDAO = new ReviewDAO(URL, USERNAME, PASSWORD);
-
             try {
                 Review r = new Review(name,description,ts);
                 r.setClassId(c_id);
-                System.out.println(c_id);
                 rDAO.add(r);
 
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
+            response.sendRedirect("/Pool/indexReview");
         }
-        response.sendRedirect("/Pool/index");
-        //request.getRequestDispatcher("/index").forward(request,response);
-        //request.getRequestDispatcher("/WEB-INF/some-result.jsp").forward(request, response);
+        else if(request.getParameter("modifRev")!=null){
+
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            System.out.println("description");
+            System.out.println(description);
+            String date = request.getParameter("date");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+
+            request.setAttribute("name",name);
+            request.setAttribute("description",description);
+            request.setAttribute("date",date);
+            request.setAttribute("id",id);
+
+            List<Promotion> c = new ArrayList<>();
+
+            try {
+                c = dao.getAll();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+            request.setAttribute("classes", c);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/add_review.jsp");
+            dispatcher.forward(request, response);
+        }
+        else if (request.getParameter("updateRev") != null) {
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+
+            String date = request.getParameter("date");
+
+            int id = Integer.parseInt(request.getParameter("id"));
+
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+
+            String dateInString = "1995-05-02";
+            java.util.Date utilbirthdate = new java.util.Date();
+            try {
+                utilbirthdate = formatter.parse(dateInString);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            java.sql.Date birthdate = new java.sql.Date(utilbirthdate.getTime());
+
+            int c_id = Integer.parseInt(request.getParameter("classes_selected"));
+
+            try {
+                Review r = new Review(name,description,birthdate);
+                r.setClassId(c_id);
+                r.setId(id);
+                rDAO.update(r);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            response.sendRedirect("/Pool/indexReview");
+        }
+        else if (request.getParameter("deleteRev") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            System.out.println(id);
+
+            try {
+                rDAO.deleteById(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            response.sendRedirect("/Pool/indexReview");
+        }
+
     }
 
 

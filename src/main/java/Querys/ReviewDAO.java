@@ -45,8 +45,24 @@ public class ReviewDAO extends DAO<Review> {
         return 1;
     }
 
+    public int update(Review review) throws SQLException {
+        System.out.println("Update");
+        String sql = "UPDATE code_reviews SET name=?, description=?, datetime=?, class_id=? WHERE id=?";
+        int rowsUpdated;
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, review.getName());
+            stmt.setString(2, review.getDescription());
+            stmt.setDate(3, review.getDate());
+            stmt.setInt(4, review.getClassId());
+            stmt.setInt(5, review.getId());
+            rowsUpdated = stmt.executeUpdate();
+        }
+        return rowsUpdated;
+    }
+
     public int deleteById(int id) throws SQLException {
-        String sql = "DELETE FROM code_review_schedule WHERE id=?";
+        String sql = "DELETE FROM code_reviews WHERE id=?";
         int rowsDeleted;
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
