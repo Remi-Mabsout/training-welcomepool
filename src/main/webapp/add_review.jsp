@@ -79,6 +79,39 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-12">
+                            <c:choose>
+                                <c:when test="${name!=null}">
+                                <form action="${pageContext.request.contextPath}/addReview" method="post" id="hg" class="">
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                        <input type="text" class="input-lg form-control" id="name" value="${name}" name="name" placeholder="Nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="promotion">Promotion</label>
+                                        <select class="input-lg form-control" name="classes_selected" id="promotion">
+                                            <c:forEach items="${classes}" var="classes">
+                                                <option value=<c:out value="${classes.id}"/> ><c:out value="${classes.name}"/></option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date">Date de la Code Review</label>
+                                        <br>
+                                        <input id="date" name="date" value="${date}" class="datepicker">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <br>
+                                        <textarea id="description" cols="50" form="hg" name="description" rows="4"> <c:out value="${description}"/> </textarea>
+                                    </div>
+
+                                    <input type="hidden" value="${id}" name="id">
+                                    <div class="text-right">
+                                        <button type="submit" name="updateRev" class="btn btn-lg btn-primary">Enregistrer</button>
+                                    </div>
+                                </form>
+                                </c:when>
+                               <c:otherwise>
                                 <form action="${pageContext.request.contextPath}/addReview" method="post" id="hg" class="">
                                     <div class="form-group">
                                         <label for="name">Nom</label>
@@ -95,7 +128,7 @@
                                     <div class="form-group">
                                         <label for="date">Date de la Code Review</label>
                                         <br>
-                                        <input id="date" class="datepicker">
+                                        <input id="date" name="date" class="datepicker">
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Description</label>
@@ -103,11 +136,13 @@
                                         <textarea id="description" cols="50" form="hg" name="description" rows="4"></textarea>
                                     </div>
 
-
+                                    <input type="hidden" value="${review.id}" name="id">
                                     <div class="text-right">
                                         <button type="submit" name="addReview" class="btn btn-lg btn-primary">Enregistrer</button>
                                     </div>
                                 </form>
+                            </c:otherwise>
+                            </c:choose>
                             </div>
                         </div>
                         <!-- /.row -->

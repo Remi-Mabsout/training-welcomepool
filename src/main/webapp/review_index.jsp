@@ -164,10 +164,10 @@
                                             <tr>
                                                 <form method="post" action="${pageContext.request.contextPath}/addReview">
                                                     <td><c:out value="${review.date}"/></td>
-                                                    <input type="hidden" value="${review.date}" name="email">
+                                                    <input type="hidden" value="${review.date}" name="date">
                                                     <input type="hidden" value="${review.id}" name="id">
                                                     <input type="hidden" value="${review.name}" name="name">
-                                                    <input type="hidden" value="${review.description}" name="name">
+                                                    <input type="hidden" value="${review.description}" name="description">
                                                     <td><c:out value="${review.name}"/> </td>
                                                     <td><c:out value="${review.description}"/> </td>
                                                     <td>
