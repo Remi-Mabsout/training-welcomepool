@@ -45,19 +45,45 @@ public class MemberDAO extends DAO<Member> {
 
     public int add(Member member) throws SQLException {
         int memberId = 0;
-        //String getId;
-        String sql = " insert into members (name,email,birthdate,class_id)"
-                + " values ('" + member.getName() + "', '" + member.getEmail() + "', '" + member.getBirthdate() + "', '" + member.getClassId() + "')";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.executeUpdate();
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    memberId = rs.getInt(1);
+
+        if(member.getClassId() == -1)
+        {
+            String sql = " insert into members (name,email,birthdate, class_id)"
+                    + " values (?, ?, ?, ?)";
+            try (Connection conn = getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, member.getName());
+                stmt.setString(2, member.getEmail());
+                stmt.setDate(3, member.getBirthdate());
+                stmt.setNull(4,Types.INTEGER);
+                stmt.executeUpdate();
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        memberId = rs.getInt(1);
+                    }
                 }
             }
         }
-        return memberId;
+        else{
+            //String getId;
+            String sql = " insert into members (name,email,birthdate, class_id)"
+                    + " values (?, ?, ?, ?)";
+            try (Connection conn = getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, member.getName());
+                stmt.setString(2, member.getEmail());
+                stmt.setDate(3, member.getBirthdate());
+                stmt.setInt(4, member.getClassId());
+                stmt.executeUpdate();
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        memberId = rs.getInt(1);
+                    }
+                }
+            }
+        }
+
+        return -1;
     }
 
     public int countByPromotion(int id) throws SQLException {
@@ -87,6 +113,9 @@ public class MemberDAO extends DAO<Member> {
 
     public int update(Member member) throws SQLException {
         System.out.println("Update");
+        System.out.println(member.getId());
+        System.out.println(member.getName());
+        System.out.println(member.getClassId());
         String sql = "UPDATE members SET name=?, email=?, birthdate=?, class_id=? WHERE id=?";
         int rowsUpdated;
         try (Connection conn = getConnection();

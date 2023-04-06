@@ -144,22 +144,15 @@ public class addReviewJspController extends HttpServlet {
 
             int id = Integer.parseInt(request.getParameter("id"));
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
-
-            String dateInString = "1995-05-02";
-            java.util.Date utilbirthdate = new java.util.Date();
-            try {
-                utilbirthdate = formatter.parse(dateInString);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-            java.sql.Date birthdate = new java.sql.Date(utilbirthdate.getTime());
+            java.time.LocalDateTime dt = LocalDateTime.parse(date, formatter);
+            Timestamp ts = Timestamp.valueOf(dt);
 
             int c_id = Integer.parseInt(request.getParameter("classes_selected"));
 
             try {
-                Review r = new Review(name,description,birthdate);
+                Review r = new Review(name,description,ts);
                 r.setClassId(c_id);
                 r.setId(id);
                 rDAO.update(r);

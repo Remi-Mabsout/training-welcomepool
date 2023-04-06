@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                         <label for="date">Date de la Code Review</label>
                                         <br>
-                                        <input id="date" name="date" value="${date}" class="datepicker">
+                                        <input id="date" name="date" value="${date}" type="datetime-local">
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Description</label>
