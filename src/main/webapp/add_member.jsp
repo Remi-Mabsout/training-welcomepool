@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="naissance">Date de naissance</label>
-                                                <input type="text" class="input-lg form-control" value="${naissance}" id="naissance"  name="naissance">
+                                                <input type="date" class="input-lg form-control" value="${naissance}" name="naissance">
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">Adresse Email</label>
@@ -103,7 +103,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="naissance">Date de naissance</label>
-                                                    <input type="text" class="input-lg form-control" id="naissance"  name="naissance">
+                                                    <input type="date" class="input-lg form-control" id="naissance"  name="naissance">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="email">Adresse Email</label>

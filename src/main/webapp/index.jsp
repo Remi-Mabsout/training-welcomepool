@@ -170,6 +170,7 @@
                                                     <input type="hidden" value="${member.id}" name="id">
                                                     <input type="hidden" value="${member.classId}" name="cid">
                                                     <input type="hidden" value="${member.name}" name="name">
+                                                    <input type="hidden" value="${member.birthdate}" name="naissance">
                                                     <td><c:out value="${member.email}"/> </td>
                                                     <td><c:out value="${member.promotion}"/> </td>
                                                     <td>

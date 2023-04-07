@@ -93,7 +93,10 @@ public class addMemberJspController extends HttpServlet {
             String email = request.getParameter("email");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
             System.out.println("addMem");
-            String dateInString = "1995-05-02";
+            String dateInString = request.getParameter("naissance");
+            System.out.println("0 " + dateInString);
+
+            //String dateInString = "1995-05-02";
             java.util.Date utilbirthdate = new java.util.Date();
             try {
                 utilbirthdate = formatter.parse(dateInString);
@@ -116,18 +119,21 @@ public class addMemberJspController extends HttpServlet {
         }
         else if(request.getParameter("modifMem")!=null){
             List<String> classes = new ArrayList<>();
-            classes.add("Fevrier");
-            classes.add("Mars");
-            request.setAttribute("classes", classes);
+//            classes.add("Fevrier");
+//            classes.add("Mars");
+//            request.setAttribute("classes", classes);
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             int id = Integer.parseInt(request.getParameter("id"));
+            String dateInString = request.getParameter("naissance");
+            System.out.println("1 " + dateInString);
             request.setAttribute("email",email);
             request.setAttribute("name",name);
             request.setAttribute("id",id);
+
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
             System.out.println("addMem");
-            String dateInString = "1995-05-02";
+            //String dateInString = "1995-05-02";
             java.util.Date utilbirthdate = new java.util.Date();
 
             try {
@@ -146,6 +152,7 @@ public class addMemberJspController extends HttpServlet {
             request.setAttribute("classes", c);
 
             java.sql.Date birthdate = new java.sql.Date(utilbirthdate.getTime());
+            request.setAttribute("naissance", birthdate);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/add_member.jsp");
             dispatcher.forward(request, response);
         }
@@ -154,13 +161,16 @@ public class addMemberJspController extends HttpServlet {
             String email = request.getParameter("email");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
             System.out.println("addMem");
-            String dateInString = "1995-05-02";
+            //String dateInString = "1995-05-02";
+            String dateInString = request.getParameter("naissance");
+            System.out.println("2 " + dateInString);
             java.util.Date utilbirthdate = new java.util.Date();
             try {
                 utilbirthdate = formatter.parse(dateInString);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
+
             java.sql.Date birthdate = new java.sql.Date(utilbirthdate.getTime());
 
             int c_id = Integer.parseInt(request.getParameter("classes_selected"));
