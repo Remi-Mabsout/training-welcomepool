@@ -82,7 +82,13 @@ public class reviewIndexJSPController extends HttpServlet {
         List<Promotion> short_proms = new ArrayList<>();
         if (prom.size() > 0) {
             for(int i = 0; prom.size() > 3 ? i < 3 : i < prom.size(); i++){
-                short_proms.add(prom.get(i));
+                Promotion tempP = prom.get(i);
+                try {
+                    tempP.setNbMembres(m.countByPromotion(tempP.getId()));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                short_proms.add(tempP);
             }
 
         }

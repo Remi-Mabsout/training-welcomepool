@@ -168,12 +168,21 @@
                                                     <td><c:out value="${member.name}"/></td>
                                                     <input type="hidden" value="${member.email}" name="email">
                                                     <input type="hidden" value="${member.id}" name="id">
+                                                    <input type="hidden" value="${member.classId}" name="cid">
                                                     <input type="hidden" value="${member.name}" name="name">
                                                     <td><c:out value="${member.email}"/> </td>
                                                     <td><c:out value="${member.promotion}"/> </td>
                                                     <td>
                                                         <button name="modifMem" type="submit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> Modifier</button>
                                                         <button name="deleteMem" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Supprimer</button>
+                                                        <c:choose>
+                                                            <c:when test="${member.classId != -1}">
+                                                                <button name="deletePromo" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Supprimer la Promo</button>
+                                                             </c:when>
+                                                         <c:otherwise>
+
+                                                         </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </form>
                                             </tr>
@@ -223,11 +232,13 @@
                             <c:forEach items="${sh_promo}" var="sh_promo">
                                 <form method="post" action="${pageContext.request.contextPath}/addProm">
                                     <button class="list-group-item" name="modifProm">
-                                        <i class="fa fa-users fa-fw"></i> <c:out value="${sh_promo.name}"/></button>
+                                        <i class="fa fa-users fa-fw"></i> <c:out value="${sh_promo.name}"/>
+                                        <span class="pull-right text-muted small"><em><c:out value="${sh_promo.nbMembres}"/> membre(s)</em>
+                                     </button>
                                     <input type="hidden" value="${sh_promo.name}" name="name">
                                     <input type="hidden" value="${sh_promo.id}" name="id">
 
-                                    <!-- <span class="pull-right text-muted small"><em><c:out value="${sh_promo.name}"/> membre(s)</em> -->
+
                                     </span>
                                     </a>
                                 </form>

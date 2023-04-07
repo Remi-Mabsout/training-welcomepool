@@ -8,7 +8,7 @@ public class Member {
     private String email;
     private Date birthdate;
     private String promotion;
-    private int classId;
+    private int classId = -1;
 
     public Member() {}
 

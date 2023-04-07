@@ -59,7 +59,7 @@ public class PromotionDAO extends DAO<Promotion> {
             stmt.setInt(1, id);
             rowsDeleted = stmt.executeUpdate();
 
-            sql = "UPDATE memebers SET class_id = NULL WHERE class_id=?";
+            sql = "UPDATE members SET class_id = NULL WHERE class_id=?";
             PreparedStatement stmt2 = conn.prepareStatement(sql);
             stmt2.setInt(1, id);
             stmt2.execute();
