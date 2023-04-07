@@ -89,6 +89,10 @@
                                                 <input type="text" class="input-lg form-control"  value="${name}" name="name"  placeholder="Nom">
                                             </div>
                                             <div class="form-group">
+                                                <label for="naissance">Date de naissance</label>
+                                                <input type="text" class="input-lg form-control" value="${naissance}" id="naissance"  name="naissance">
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="email">Adresse Email</label>
                                                 <input type="email" class="input-lg form-control" value="${email}" name="email" id="email" placeholder="Adresse Email">
                                                 </c:when>
@@ -96,6 +100,10 @@
                                                 <div class="form-group">
                                                     <label for="name">Nom</label>
                                                     <input type="text" class="input-lg form-control" id="name"  name="name" placeholder="Nom">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="naissance">Date de naissance</label>
+                                                    <input type="text" class="input-lg form-control" id="naissance"  name="naissance">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="email">Adresse Email</label>
